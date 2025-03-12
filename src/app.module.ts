@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // import { UserModule } from './user/user.module'; // Example module
 import { SlavesModule } from './slaves/slaves.module';
 import { BattlesModule } from './battles/battles.module';
+import { DictatorsModule } from './dictators/dictators.module';
+import { SponsorsModule } from './sponsors/sponsors.module';
+import { BlackmarketModule } from './blackmarket/blackmarket.module';
 
 @Module({
   imports: [
@@ -22,6 +25,9 @@ import { BattlesModule } from './battles/battles.module';
     }),
     SlavesModule,
     BattlesModule,
+    DictatorsModule,
+    SponsorsModule,
+    BlackmarketModule,
     // UserModule,  // Example of another module you might have
   ],
 })
