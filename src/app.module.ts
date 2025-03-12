@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // import { UserModule } from './user/user.module'; // Example module
 import { SlavesModule } from './slaves/slaves.module';
+import { BattlesModule } from './battles/battles.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SlavesModule } from './slaves/slaves.module';
       synchronize: true, // Be careful with this in production!
     }),
     SlavesModule,
+    BattlesModule,
     // UserModule,  // Example of another module you might have
   ],
 })

@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { statusenum } from "../status.enum";
+import { Max, Min } from "class-validator";
 
 @Entity()
 export class Slave {
@@ -15,12 +16,16 @@ export class Slave {
     @Column('text')
     origin: string;
     @Column('numeric')
+    @Min(1)
+    @Max(100)
     strength: number;
-    @Column()
+    @Column('numeric')
+    @Min(1)
+    @Max(100)
     agility: number;
-    @Column()
+    @Column('numeric')
     wins: number;
-    @Column()
+    @Column('numeric')
     losses: number;
     @Column({type: 'enum', enum: statusenum, default:statusenum.alive})
     state: statusenum
