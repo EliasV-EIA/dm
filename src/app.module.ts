@@ -19,7 +19,7 @@ import { BlackmarketModule } from './blackmarket/blackmarket.module';
       port: parseInt(process.env.DB_PORT ||'5432', 10),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      database: process.env.DB_DATABASE, //el error que tira cuando corre es ENOTFound, que se supone que significa que no encuentra la url. Nada que haga lo soluciona
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // Be careful with this in production!
     }),
