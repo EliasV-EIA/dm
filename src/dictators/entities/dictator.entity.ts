@@ -1,5 +1,5 @@
 import { Max, Min } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 
 @Entity()
 export class Dictator {
@@ -17,5 +17,7 @@ export class Dictator {
         @Column('numeric')
         @Min(1)
         @Max(100)
-        loyalty: number;        
+        loyalty: number;
+        @Column('timestamptz')
+        created_at: Timestamp;
 }

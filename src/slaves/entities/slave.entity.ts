@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { statusenum } from "../status.enum";
 import { Max, Min } from "class-validator";
 
@@ -28,5 +28,7 @@ export class Slave {
     @Column('numeric')
     losses: number;
     @Column({type: 'enum', enum: statusenum, default:statusenum.alive})
-    state: statusenum
+    state: statusenum;
+    @Column('timestamptz')
+    created_at: Timestamp;
 }

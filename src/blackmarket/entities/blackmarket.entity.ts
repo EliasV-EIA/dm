@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { UUID } from "typeorm/driver/mongodb/bson.typings";
+import { Timestamp, UUID } from "typeorm/driver/mongodb/bson.typings";
 import { status } from "../status.enum";
 
 @Entity()
@@ -16,4 +16,6 @@ export class Blackmarket {
     amount: number
     @Column('enum')
     status: status
+    @Column('timestamptz')
+    created_at: Timestamp
 }
