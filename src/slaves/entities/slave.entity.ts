@@ -11,24 +11,19 @@ export class Slave {
         nullable:false,
     })
     name: string;
-    @Column('text')
+    @Column('text', {default:'N/A'})
     nickname: string;
-    @Column('text')
+    @Column('text', {default: 'N/A'})
     origin: string;
-    @Column('numeric')
-    @Min(1)
-    @Max(100)
+    @Column('numeric', {default:0})
     strength: number;
-    @Column('numeric')
-    @Min(1)
-    @Max(100)
+    @Column('numeric', {default:0})
     agility: number;
-    @Column('numeric')
-    wins: number;
-    @Column('numeric')
+    @Column('numeric', {default:0})
+    @Column('numeric', {default:0})
     losses: number;
     @Column({type: 'enum', enum: statusenum, default:statusenum.alive})
     state: statusenum;
-    @Column('timestamptz')
+    @Column('timestamptz', {default:()=> 'CURRENT_TIMESTAMP'})
     created_at: Timestamp;
 }

@@ -7,6 +7,8 @@ import { BattlesModule } from './battles/battles.module';
 import { DictatorsModule } from './dictators/dictators.module';
 import { SponsorsModule } from './sponsors/sponsors.module';
 import { BlackmarketModule } from './blackmarket/blackmarket.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -26,5 +28,7 @@ import { BlackmarketModule } from './blackmarket/blackmarket.module';
     BlackmarketModule,
     // UserModule,  // Example of another module you might have
   ],
+  controllers:[AppController],
+  providers: [AppService],
 })
 export class AppModule {}
