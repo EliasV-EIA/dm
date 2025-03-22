@@ -1,5 +1,5 @@
 export enum status{
-    comleted = 'COMPLETED',
+    completed = 'COMPLETED',
     failed = 'FAILED',
     discovered = 'DISCOVERED'
 }
