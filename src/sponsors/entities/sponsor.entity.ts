@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 
 @Entity()
 export class Sponsor {
@@ -8,10 +8,10 @@ export class Sponsor {
     company_name: string;
     @Column('text')
     donated_items: string;
-    @Column('text',{
-        unique:true,
+    @Column('uuid',{
         nullable:true,
     })
     preffered_fighter: string;
-    
+    @Column('timestamptz', {default:()=>'CURRENT_TIMESTAMP'})
+    created_at: Timestamp;
     }

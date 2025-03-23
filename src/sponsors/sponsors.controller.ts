@@ -2,13 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SponsorsService } from './sponsors.service';
 import { CreateSponsorDto } from './dto/create-sponsor.dto';
 import { UpdateSponsorDto } from './dto/update-sponsor.dto';
+import { Sponsor } from './entities/sponsor.entity';
 
 @Controller('sponsors')
 export class SponsorsController {
   constructor(private readonly sponsorsService: SponsorsService) {}
 
   @Post()
-  create(@Body() createSponsorDto: CreateSponsorDto) {
+  create(@Body() createSponsorDto: CreateSponsorDto): Promise<Sponsor> {
     return this.sponsorsService.create(createSponsorDto);
   }
 
@@ -19,16 +20,16 @@ export class SponsorsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.sponsorsService.findOne(+id);
+    return this.sponsorsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSponsorDto: UpdateSponsorDto) {
-    return this.sponsorsService.update(+id, updateSponsorDto);
+    return this.sponsorsService.update(id, updateSponsorDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.sponsorsService.remove(+id);
+    return this.sponsorsService.remove(id);
   }
 }
