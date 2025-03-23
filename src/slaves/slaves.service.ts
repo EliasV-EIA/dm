@@ -14,7 +14,6 @@ export class SlavesService {
 ){}
   
   async create(createSlaveDto: CreateSlaveDto): Promise<Slave> {
-    const {name , nickname, origin, strength, agility, state, wins, losses} = createSlaveDto;
     const newSlave=this.slaveRepository.create(createSlaveDto); 
     await this.slaveRepository.save(newSlave);
     return newSlave;

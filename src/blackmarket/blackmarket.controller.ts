@@ -2,13 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { BlackmarketService } from './blackmarket.service';
 import { CreateBlackmarketDto } from './dto/create-blackmarket.dto';
 import { UpdateBlackmarketDto } from './dto/update-blackmarket.dto';
+import { Blackmarket } from './entities/blackmarket.entity';
 
 @Controller('blackmarket')
 export class BlackmarketController {
   constructor(private readonly blackmarketService: BlackmarketService) {}
 
   @Post()
-  create(@Body() createBlackmarketDto: CreateBlackmarketDto) {
+  create(@Body() createBlackmarketDto: CreateBlackmarketDto): Promise<Blackmarket> {
     return this.blackmarketService.create(createBlackmarketDto);
   }
 
@@ -19,16 +20,16 @@ export class BlackmarketController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.blackmarketService.findOne(+id);
+    return this.blackmarketService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBlackmarketDto: UpdateBlackmarketDto) {
-    return this.blackmarketService.update(+id, updateBlackmarketDto);
+    return this.blackmarketService.update(id, updateBlackmarketDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.blackmarketService.remove(+id);
+    return this.blackmarketService.remove(id);
   }
 }

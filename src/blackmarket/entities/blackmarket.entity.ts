@@ -14,7 +14,7 @@ export class Blackmarket {
     item: string
     @Column('decimal')
     amount: number
-    @Column('enum')
+    @Column('enum', {default:status.completed})
     status: status
     @Column('timestamptz')
     created_at: Timestamp
