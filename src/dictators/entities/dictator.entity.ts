@@ -12,12 +12,10 @@ export class Dictator {
         name: string;
         @Column('text')
         territory:string;
-        @Column('numeric')
+        @Column('numeric', {default:0})
         number_of_slaves: number;
-        @Column('numeric')
-        @Min(1)
-        @Max(100)
+        @Column('numeric', {default:100})
         loyalty: number;
-        @Column('timestamptz')
+        @Column('timestamptz', {default:()=> 'CURRENT_TIMESTAMP'})
         created_at: Timestamp;
 }

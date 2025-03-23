@@ -2,13 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DictatorsService } from './dictators.service';
 import { CreateDictatorDto } from './dto/create-dictator.dto';
 import { UpdateDictatorDto } from './dto/update-dictator.dto';
+import { Dictator } from './entities/dictator.entity';
 
 @Controller('dictators')
 export class DictatorsController {
   constructor(private readonly dictatorsService: DictatorsService) {}
 
   @Post()
-  create(@Body() createDictatorDto: CreateDictatorDto) {
+  create(@Body() createDictatorDto: CreateDictatorDto): Promise<Dictator> {
     return this.dictatorsService.create(createDictatorDto);
   }
 
@@ -19,16 +20,16 @@ export class DictatorsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.dictatorsService.findOne(+id);
+    return this.dictatorsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDictatorDto: UpdateDictatorDto) {
-    return this.dictatorsService.update(+id, updateDictatorDto);
+    return this.dictatorsService.update(id, updateDictatorDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.dictatorsService.remove(+id);
+    return this.dictatorsService.remove(id);
   }
 }
