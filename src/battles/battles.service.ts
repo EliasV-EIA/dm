@@ -19,7 +19,7 @@ export class BattlesService {
   }
 
   findAll() {
-    return `This action returns all battles`;
+    return this.battleRepository.find({});
   }
 
   findOne(id: string) {
