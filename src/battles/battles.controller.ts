@@ -2,13 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { BattlesService } from './battles.service';
 import { CreateBattleDto } from './dto/create-battle.dto';
 import { UpdateBattleDto } from './dto/update-battle.dto';
+import { Battle } from './entities/battle.entity';
 
 @Controller('battles')
 export class BattlesController {
   constructor(private readonly battlesService: BattlesService) {}
 
   @Post()
-  create(@Body() createBattleDto: CreateBattleDto) {
+  create(@Body() createBattleDto: CreateBattleDto):Promise<Battle> {
     return this.battlesService.create(createBattleDto);
   }
 
@@ -19,16 +20,16 @@ export class BattlesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.battlesService.findOne(+id);
+    return this.battlesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBattleDto: UpdateBattleDto) {
-    return this.battlesService.update(+id, updateBattleDto);
+    return this.battlesService.update(id, updateBattleDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.battlesService.remove(+id);
+    return this.battlesService.remove(id);
   }
 }

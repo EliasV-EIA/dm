@@ -9,15 +9,15 @@ export class Battle {
     contestant_1:string;
     @Column('uuid')
     contestant_2:string;
-    @Column('text',{
-        unique:true,
+    @Column('uuid',{
         nullable:true,
+        default:null
     })
     winner: string;
     @Column('boolean')
     death_occured: boolean
     @Column('string')
     injuries: string
-    @Column('timestamp')
+    @Column('timestamp', {default:()=>'CURRENT_TIMESTAMP'})
     date: Timestamp
 }

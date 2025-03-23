@@ -16,6 +16,6 @@ export class Blackmarket {
     amount: number
     @Column('enum', {default:status.completed})
     status: status
-    @Column('timestamptz')
+    @Column('timestamptz', {default:()=>'CURRENT_TIMESTAMP'})
     created_at: Timestamp
 }
