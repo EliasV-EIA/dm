@@ -1,8 +1,8 @@
 import { IsDecimal, IsEnum, IsNotEmpty, IsString } from "class-validator";
-import { status } from "../status.enum";
+import { blackstatus } from "../status.enum";
 
 export class CreateBlackmarketDto {
-    @IsString()
+    @IsString() 
     @IsNotEmpty()
     buyer_id:string;
     @IsString()
@@ -12,7 +12,7 @@ export class CreateBlackmarketDto {
     item:string;
     @IsDecimal()
     amount: number;
-    @IsEnum(status)
-    status: status;
+    @IsEnum(blackstatus)
+    status: blackstatus;
     
 }

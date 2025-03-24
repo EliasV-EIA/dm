@@ -3,6 +3,7 @@ import { DictatorsService } from './dictators.service';
 import { CreateDictatorDto } from './dto/create-dictator.dto';
 import { UpdateDictatorDto } from './dto/update-dictator.dto';
 import { Dictator } from './entities/dictator.entity';
+import { Slave } from 'src/slaves/entities/slave.entity';
 
 @Controller('dictators')
 export class DictatorsController {
@@ -31,5 +32,9 @@ export class DictatorsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.dictatorsService.remove(id);
+  }
+  @Get(':dicname/slaves')
+  async getSlavesOwned(@Param('dicname') dicname: string): Promise<Slave[]> {
+    return this.dictatorsService.findSlavesOwned(dicname);
   }
 }

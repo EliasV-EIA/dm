@@ -1,5 +1,7 @@
+import { Exclude } from "class-transformer";
 import { Max, Min } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Slave } from "src/slaves/entities/slave.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 
 @Entity()
 export class Dictator {
@@ -18,4 +20,7 @@ export class Dictator {
         loyalty: number;
         @Column('timestamptz', {default:()=> 'CURRENT_TIMESTAMP'})
         created_at: Timestamp;
+        @Exclude()
+        @OneToMany(()=>Slave,slave=>slave.origin)
+        slaves:Slave[];
 }
