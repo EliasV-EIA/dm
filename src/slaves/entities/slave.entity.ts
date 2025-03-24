@@ -1,6 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { statusenum } from "../status.enum";
 import { Max, Min } from "class-validator";
+import { Exclude } from "class-transformer";
+import { Dictator } from "src/dictators/entities/dictator.entity";
 
 @Entity()
 export class Slave {
@@ -26,4 +28,7 @@ export class Slave {
     state: statusenum;
     @Column('timestamptz', {default:()=> 'CURRENT_TIMESTAMP'})
     created_at: Timestamp;
+    @Exclude()
+    @ManyToOne(()=>Dictator,dictator=>dictator.slaves)
+    dictator:Dictator;
 }

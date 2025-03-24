@@ -29,7 +29,7 @@ export class DictatorsController {
     return this.dictatorsService.update(id, updateDictatorDto);
   }
 
-  @Delete(':id')
+  @Delete(':id')  
   remove(@Param('id') id: string) {
     return this.dictatorsService.remove(id);
   }
