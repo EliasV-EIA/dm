@@ -22,6 +22,7 @@ export class Slave {
     @Column('numeric', {default:0})
     agility: number;
     @Column('numeric', {default:0})
+    wins:number;
     @Column('numeric', {default:0})
     losses: number;
     @Column({type: 'enum', enum: statusenum, default:statusenum.alive})
