@@ -33,8 +33,8 @@ export class DictatorsController {
   remove(@Param('id') id: string) {
     return this.dictatorsService.remove(id);
   }
-  @Get(':dicname/slaves')
-  async getSlavesOwned(@Param('dicname') dicname: string): Promise<Slave[]> {
-    return this.dictatorsService.findSlavesOwned(dicname);
+  @Get(':name/slaves')
+  async getSlavesOwned(@Param('name') name: string): Promise<Slave[]> {
+    return this.dictatorsService.findSlavesOwned(name);
   }
 }

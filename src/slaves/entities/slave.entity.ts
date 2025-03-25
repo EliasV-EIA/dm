@@ -15,7 +15,7 @@ export class Slave {
     name: string;
     @Column('text', {default:'N/A'})
     nickname: string;
-    @Column('text', {default: 'N/A'})
+    @Column('text', {default: 'N/A', nullable:false})
     origin: string;
     @Column('numeric', {default:0})
     strength: number;
