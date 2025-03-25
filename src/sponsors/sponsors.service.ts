@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSponsorDto } from './dto/create-sponsor.dto';
 import { UpdateSponsorDto } from './dto/update-sponsor.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,15 +21,26 @@ export class SponsorsService {
     return this.sponsorRepository.find({});
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} sponsor`;
-  }
+ async findOne(id: string) {
+     const temp= await this.sponsorRepository.findOneBy({id:id});
+     if(!temp){
+       throw new NotFoundException(`Sponsor #${id} not found`)
+     }
+     return temp
+   }
 
-  update(id: string, updateSponsorDto: UpdateSponsorDto) {
-    return `This action updates a #${id} sponsor`;
-  }
-
-  remove(id: string) {
-    return `This action removes a #${id} sponsor`;
-  }
+      async update(id: string, updateSponsorDto: UpdateSponsorDto) {
+        const temp=await this.sponsorRepository.preload({id:id,...updateSponsorDto});
+        if(!temp){
+          throw new NotFoundException(`Sponsor #${id} not found`);
+        }
+        await this.sponsorRepository.save(temp);
+        return temp;
+      }
+    
+      remove(id: string) {
+        const temp=this.findOne(id);
+        this.sponsorRepository.delete({id:id}); 
+        return temp;  }
+  
 }

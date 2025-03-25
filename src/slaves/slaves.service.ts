@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSlaveDto } from './dto/create-slave.dto';
 import { UpdateSlaveDto } from './dto/update-slave.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,15 +22,26 @@ export class SlavesService {
   findAll() {
     return this.slaveRepository.find({});  }
 
-  findOne(id: string) {
-    return `This action returns a #${id} slave`;
-  }
+  async findOne(id: string) {
+      const temp= await this.slaveRepository.findOneBy({id:id});
+      if(!temp){
+        throw new NotFoundException(`Slave #${id} not found`)
+      }
+      return temp
+    }
 
-  update(id: string, updateSlaveDto: UpdateSlaveDto) {
-    return `This action updates a #${id} slave`;
-  }
+    async update(id: string, updateSlaveDto: UpdateSlaveDto) {
+      const temp=await this.slaveRepository.preload({id:id,...updateSlaveDto});
+      if(!temp){
+        throw new NotFoundException(`Slace #${id} not found`);
+      }
+      await this.slaveRepository.save(temp);
+      return temp;
+    }
+  
+    remove(id: string) {
+      const temp=this.findOne(id);
+      this.slaveRepository.delete({id:id}); 
+      return temp;  }
 
-  remove(id: string) {
-    return `This action removes a #${id} slave`;
-  }
 }

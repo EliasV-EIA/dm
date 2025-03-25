@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBattleDto } from './dto/create-battle.dto';
 import { UpdateBattleDto } from './dto/update-battle.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,15 +22,26 @@ export class BattlesService {
     return this.battleRepository.find({});
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} battle`;
-  }
+  async findOne(id: string) {
+      const temp= await this.battleRepository.findOneBy({id:id});
+      if(!temp){
+        throw new NotFoundException(`Battle #${id} not found`)
+      }
+      return temp
+    }
 
-  update(id: string, updateBattleDto: UpdateBattleDto) {
-    return `This action updates a #${id} battle`;
-  }
+    async update(id: string, updateBattleDto: UpdateBattleDto) {
+      const temp=await this.battleRepository.preload({id:id,...updateBattleDto});
+      if(!temp){
+        throw new NotFoundException(`Battle #${id} not found`);
+      }
+      await this.battleRepository.save(temp);
+      return temp;
+    }
+  
+    remove(id: string) {
+      const temp=this.findOne(id);
+      this.battleRepository.delete({id:id}); 
+      return temp;  }
 
-  remove(id: string) {
-    return `This action removes a #${id} battle`;
-  }
 }

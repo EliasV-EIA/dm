@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBlackmarketDto } from './dto/create-blackmarket.dto';
 import { UpdateBlackmarketDto } from './dto/update-blackmarket.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,15 +21,26 @@ constructor(@InjectRepository(Blackmarket)
     return this.blackmarketRepository.find({});
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} blackmarket`;
-  }
+ async findOne(id: string) {
+     const temp= await this.blackmarketRepository.findOneBy({id:id});
+     if(!temp){
+       throw new NotFoundException(`Blackmarket #${id} not found`)
+     }
+     return temp;
+   }
 
-  update(id: string, updateBlackmarketDto: UpdateBlackmarketDto) {
-    return `This action updates a #${id} blackmarket`;
-  }
-
-  remove(id: string) {
-    return `This action removes a #${id} blackmarket`;
-  }
+      async update(id: string, updateBlackmarketDto: UpdateBlackmarketDto) {
+        const temp=await this.blackmarketRepository.preload({id:id,...updateBlackmarketDto});
+        if(!temp){
+          throw new NotFoundException(`Blackmarket #${id} not found`);
+        }
+        await this.blackmarketRepository.save(temp);
+        return temp;
+      }
+    
+      remove(id: string) {
+        const temp=this.findOne(id);
+        this.blackmarketRepository.delete({id:id}); 
+        return temp;  }
+  
 }

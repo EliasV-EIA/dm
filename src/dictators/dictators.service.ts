@@ -37,7 +37,7 @@ export class DictatorsService {
   async update(id: string, updateDictatorDto: UpdateDictatorDto) {
     const temp=await this.dictatorRepository.preload({id:id,...updateDictatorDto});
     if(!temp){
-      throw new NotFoundException(`Dish #${id} not found`);
+      throw new NotFoundException(`Dictator #${id} not found`);
     }
     await this.dictatorRepository.save(temp);
     return temp;
