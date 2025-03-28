@@ -19,7 +19,7 @@ import { AppService } from './app.service';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true, // Recuerda cambiar a false en producción
+      synchronize: false, // Recuerda cambiar a false en producción
     }),
     SlavesModule,
     BattlesModule,
