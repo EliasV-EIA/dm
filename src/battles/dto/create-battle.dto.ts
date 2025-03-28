@@ -10,8 +10,8 @@ export class CreateBattleDto {
     @IsString()
     @IsUUID()
     winner: string;
-    @IsBoolean()
-    death_occured: boolean;
+    @IsString()
+    death_occured: string;
     @IsString()
     injuries: string;
 }

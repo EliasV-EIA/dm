@@ -12,7 +12,7 @@ export class Blackmarket {
     seller_id: string
     @Column('text')
     item: string
-    @Column('decimal')
+    @Column('numeric')
     amount: number
     @Column( {type:'enum',enum:blackstatus, default:blackstatus.completed})
     status: blackstatus;

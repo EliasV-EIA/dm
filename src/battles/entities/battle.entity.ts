@@ -14,8 +14,8 @@ export class Battle {
         default:null
     })
     winner: string;
-    @Column('boolean')
-    death_occured: boolean
+    @Column('text')
+    death_occured: string;
     @Column('text')
     injuries: string;
     @Column('timestamp', {default:()=>'CURRENT_TIMESTAMP'})
